@@ -1,0 +1,8 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+
+import es.cic.curso.curso14.ejercicio016.dominio.CineSalas;
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.IRepository;
+
+public interface CineSesionesRepository extends IRepository<Long, CineSalas> {
+}

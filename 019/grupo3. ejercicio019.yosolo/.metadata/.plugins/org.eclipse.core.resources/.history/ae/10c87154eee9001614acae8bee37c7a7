@@ -1,0 +1,75 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import es.cic.curso.curso14.ejercicio016.backend.*;
+import es.cic.curso.curso14.ejercicio016.dominio.Horarios;
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.IRepository;
+import es.cic.curso.curso14.ejercicio016.repository.HorariosRepository;
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={"classpath:es/cic/curso/curso14/ejercicio016/applicationContext.xml"})
+public class HorariosRepositoryTest extends AbstractRepositoryImplTest<Long, Horarios> {
+
+
+	@Autowired
+	private HorariosRepository sut;
+
+
+
+	@Override
+	public IRepository<Long, Horarios> getRepository() {
+		return sut;
+	}
+
+	@Override
+	public Horarios getInstanceDeTParaNuevo() {
+		Horarios horario = new Horarios();
+		horario.setFecha("22/12/2016");
+		horario.setHora("20:30");
+		return horario;
+	}
+	
+	@Override
+	public Horarios getInstanceDeTParaLectura() {
+		Horarios horario = new Horarios();
+		horario.setFecha("22/12/2016");
+		horario.setHora("20:30");
+		return horario;
+	}
+
+	@Override
+	public boolean sonDatosIguales(Horarios t1, Horarios t2) {
+		if (t1 == null || t2 == null) {
+			throw new UnsupportedOperationException("No puedo comparar nulos");
+		}
+		if (t1.getFecha() == (t2.getFecha()) && (t1.getHora() == t2.getHora())){
+			return false;
+		}		
+		return true;
+	}
+
+	@Override
+	public Long getClavePrimariaNoExistente() {
+		return Long.MAX_VALUE;
+	}
+
+	@Override
+	public Horarios getInstanceDeTParaModificar(Long clave) {
+		Horarios horario = getInstanceDeTParaLectura();
+		horario.setId(clave);
+		horario.setFecha("22/12/2016");
+		return horario;
+	}
+
+
+
+	
+}

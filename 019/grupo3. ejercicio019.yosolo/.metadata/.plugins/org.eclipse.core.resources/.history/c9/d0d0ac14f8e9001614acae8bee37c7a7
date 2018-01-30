@@ -1,0 +1,20 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import org.springframework.stereotype.Repository;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Horarios;
+import es.cic.curso.curso14.ejercicio016.repoAbst.AbstractRepositoryImpl;
+
+@Repository
+public class HorariosRepositoryImpl extends AbstractRepositoryImpl<Long, Horarios> implements HorariosRepository {
+
+	@Override
+	public Class<Horarios> getClassDeT() {
+		return Horarios.class;
+	}
+
+	@Override
+	public String getNombreTabla() {
+		return "Horarios";
+	}
+}

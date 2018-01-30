@@ -1,0 +1,22 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import org.springframework.stereotype.Repository;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Venta;
+import es.cic.curso.curso14.ejercicio016.dominio.Salas;
+import es.cic.curso.curso14.ejercicio016.dominio.Sesiones;
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.AbstractRepositoryImpl;
+
+@Repository
+public class CineSesionesRepositoryImpl extends AbstractRepositoryImpl<Long, Sesiones> implements CineSesionesRepository {
+
+	@Override
+	public Class<Sesiones> getClassDeT() {
+		return Sesiones.class;
+	}
+
+	@Override
+	public String getNombreTabla() {
+		return "CineSesiones";
+	}
+}

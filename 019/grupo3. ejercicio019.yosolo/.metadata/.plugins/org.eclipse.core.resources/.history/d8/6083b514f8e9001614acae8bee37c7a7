@@ -1,0 +1,73 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Venta;
+import es.cic.curso.curso14.ejercicio016.repoAbst.AbstractRepositoryImplTest;
+import es.cic.curso.curso14.ejercicio016.repoAbst.IRepository;
+import es.cic.curso.curso14.ejercicio016.repository.VentaRepository;
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={"classpath:es/cic/curso/curso14/ejercicio016/applicationContext.xml"})
+public class VentaRepositoryTest extends AbstractRepositoryImplTest<Long, Venta> {
+
+
+	@Autowired
+	private VentaRepository sut;
+
+
+
+	@Override
+	public IRepository<Long, Venta> getRepository() {
+		return sut;
+	}
+
+	@Override
+	public Venta getInstanceDeTParaNuevo() {
+		Venta venta = new Venta();
+		venta.setSalaId(2);
+		return venta;
+	}
+	
+	@Override
+	public Venta getInstanceDeTParaLectura() {
+		Venta venta = new Venta();
+		venta.setSalaId(2);
+		return venta;
+	}
+
+	@Override
+	public boolean sonDatosIguales(Venta t1, Venta t2) {
+		if (t1 == null || t2 == null) {
+			throw new UnsupportedOperationException("No puedo comparar nulos");
+		}
+		if (t1.getId().equals(t2.getId())) {
+			return false;
+		}		
+		return true;
+	}
+
+	@Override
+	public Long getClavePrimariaNoExistente() {
+		return Long.MAX_VALUE;
+	}
+
+	@Override
+	public Venta getInstanceDeTParaModificar(Long clave) {
+		Venta venta = getInstanceDeTParaLectura();
+		venta.setId(clave);
+		venta.setSalaId(2);
+		return venta;
+	}
+
+
+
+	
+}

@@ -1,0 +1,6 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Sala;
+
+public interface SalaRepository extends IRepository<Long, Sala> {
+}

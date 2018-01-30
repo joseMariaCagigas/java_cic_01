@@ -1,0 +1,8 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+
+import es.cic.curso.curso14.ejercicio016.dominio.Sesiones;
+import es.cic.curso.curso14.ejercicio016.repositorioAbstracto.IRepository;
+
+public interface SesionesRepository extends IRepository<Long, Sesiones> {
+}

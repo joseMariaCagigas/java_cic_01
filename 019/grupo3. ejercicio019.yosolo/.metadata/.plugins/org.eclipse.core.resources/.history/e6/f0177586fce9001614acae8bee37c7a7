@@ -1,0 +1,77 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import es.cic.curso.curso14.ejercicio016.datos.Reservas;
+import es.cic.curso.curso14.ejercicio016.repoAbst.AbstractRepositoryImplTest;
+import es.cic.curso.curso14.ejercicio016.repoAbst.IRepository;
+import es.cic.curso.curso14.ejercicio016.repository.ReservasRepository;
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={"classpath:es/cic/curso/curso14/ejercicio016/applicationContext.xml"})
+public class ReservasRepositoryTest extends AbstractRepositoryImplTest<Long, Reservas> {
+
+
+	@Autowired
+	private ReservasRepository sut;
+
+
+
+	@Override
+	public IRepository<Long, Reservas> getRepository() {
+		return sut;
+	}
+
+	@Override
+	public Reservas getInstanceDeTParaNuevo() {
+		Reservas reserva = new Reservas();
+		reserva.setAsientoid(54);
+		reserva.setEstado(false);
+		
+		return reserva;
+	}
+	
+	@Override
+	public Reservas getInstanceDeTParaLectura() {
+		Reservas reserva = new Reservas();
+		reserva.setAsientoid(54);
+		reserva.setEstado(false);
+		
+		return reserva;
+	}
+
+	@Override
+	public boolean sonDatosIguales(Reservas t1, Reservas t2) {
+		if (t1 == null || t2 == null) {
+			throw new UnsupportedOperationException("No puedo comparar nulos");
+		}
+		if (t1.getAsientoid() == (t2.getAsientoid())){
+			return false;
+		}		
+		return true;
+	}
+
+	@Override
+	public Long getClavePrimariaNoExistente() {
+		return Long.MAX_VALUE;
+	}
+
+	@Override
+	public Reservas getInstanceDeTParaModificar(Long clave) {
+		Reservas reserva = getInstanceDeTParaLectura();
+		reserva.setId(clave);
+		reserva.setAsientoid(54);
+		return reserva;
+	}
+
+
+
+	
+}

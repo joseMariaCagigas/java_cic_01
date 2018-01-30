@@ -1,0 +1,20 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import org.springframework.stereotype.Repository;
+
+import es.cic.curso.curso14.ejercicio016.dominio.CineAsientos;
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.AbstractRepositoryImpl;
+
+@Repository
+public class CineAsientosRepositoryImpl extends AbstractRepositoryImpl<Long, CineAsientos> implements CineAsientosRepository {
+
+	@Override
+	public Class<CineAsientos> getClassDeT() {
+		return CineAsientos.class;
+	}
+
+	@Override
+	public String getNombreTabla() {
+		return "CineAsientos";
+	}
+}

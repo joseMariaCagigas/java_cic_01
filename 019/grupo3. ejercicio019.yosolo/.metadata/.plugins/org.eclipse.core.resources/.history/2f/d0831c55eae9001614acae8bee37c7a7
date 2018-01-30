@@ -1,0 +1,104 @@
+package es.cic.curso.curso14.ejercicio016.dominio;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.Identificable;
+@Entity
+public class Sesiones implements Identificable<Long>{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4522595187816955491L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
+	@Column(name="salaid")
+	private long salaid;
+	
+	@Column(name="butacasOcupadas")
+	private long butacasOcupadas;
+
+	public Sesiones(Long id, long salaid, long butacasOcupadas) {
+		super();
+		this.id = id;
+		this.salaid = salaid;
+
+	}
+
+	public Sesiones(long salaid, long butacasOcupadas) {
+		super();
+		this.salaid = salaid;
+		this.butacasOcupadas = butacasOcupadas;
+	}
+
+	public Sesiones() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public long getSalaid() {
+		return salaid;
+	}
+
+	public void setSalaid(long salaid) {
+		this.salaid = salaid;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (butacasOcupadas ^ (butacasOcupadas >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (int) (salaid ^ (salaid >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sesiones other = (Sesiones) obj;
+		if (butacasOcupadas != other.butacasOcupadas)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (salaid != other.salaid)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "CineSesiones [id=" + id + ", salaid=" + salaid + "]";
+	}
+
+	public long getButacasOcupadas() {
+		return butacasOcupadas;
+	}
+
+	public void setButacasOcupadas(long butacasOcupadas) {
+		this.butacasOcupadas = butacasOcupadas;
+	}
+}

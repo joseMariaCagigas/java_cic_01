@@ -1,0 +1,55 @@
+1486033336458	Delete element
+1486034707288	Copy compilation unit
+1486034724919	Copy compilation unit
+1486034800616	Copy compilation unit
+1486034820115	Copy compilation unit
+1486034866782	Copy compilation unit
+1486034884936	Copy compilation unit
+1486034928351	Delete elements
+1486038103504	Delete element
+1486038995449	Delete element
+1486039214085	Delete element
+1486040963269	Delete elements
+1486041161931	Delete elements
+1486041362461	Move compilation units
+1486041427706	Copy compilation units
+1486041607847	Copy compilation units
+1486041765281	Copy compilation units
+1486041867088	Copy compilation units
+1486041985435	Rename type 'ProductoRepositoryTest'
+1486042815508	Rename type 'CineAsientos'
+1486043254471	Rename type 'CineAsiento'
+1486107198218	Delete element
+1486107266118	Rename type 'CineHorarios'
+1486107285634	Rename type 'CineAsientos'
+1486107295200	Rename type 'CineSalas'
+1486107305358	Rename type 'CineReservas'
+1486107314252	Rename type 'CineSesiones'
+1486108346811	Rename type 'CineAsientosRepository'
+1486108355752	Rename type 'CineAsientosRepositoryImpl'
+1486108477996	Rename type 'Asientos'
+1486108492238	Rename type 'AsientosRepository'
+1486108502167	Rename type 'AsientosRepositoryImpl'
+1486108514180	Rename type 'AsientosService'
+1486108759783	Delete element
+1486108915054	Rename type 'CineHorarioRepository'
+1486108929218	Rename type 'CineHorarioRepositoryImpl'
+1486108938614	Rename type 'CineReservaRepository'
+1486108951984	Rename type 'CineReservaRepositoryImpl'
+1486108959882	Rename type 'CineSalasRepository'
+1486108966246	Rename type 'CineSalasRepositoryImpl'
+1486108982846	Rename type 'CineSesionesRepository'
+1486108989668	Rename type 'CineSesionesRepositoryImpl'
+1486109264673	Delete element
+1486109374187	Rename package 'backend'
+1486109389731	Rename package 'es.cic.curso.curso14.ejercicio0'
+1486109464009	Move compilation unit
+1486111324192	Copy compilation unit
+1486111785692	Copy compilation unit
+1486112119286	Copy compilation unit
+1486112439609	Copy compilation unit
+1486112449647	Copy compilation unit
+1486112462680	Rename type 'SalasRepositoryTest'
+1486112467261	Copy compilation unit
+1486112472276	Delete element
+1486112891652	Rename package 'es.cic.curso.curso14.ejercicio016.repositorioEstatico'

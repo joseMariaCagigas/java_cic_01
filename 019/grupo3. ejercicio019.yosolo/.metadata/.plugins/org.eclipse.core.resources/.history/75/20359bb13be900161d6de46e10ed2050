@@ -1,0 +1,71 @@
+package es.cic.curso.curso14.ejercicio016.dominio;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import es.cic.curso.curso14.ejercicio016.repository.Identificable;
+@Entity
+@Table(name="sesion")
+public class Sesion implements Identificable<Long>{
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+
+
+
+	@Column(name="salaId")
+	private long salaId;
+
+
+	
+	public Sesion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public Sesion(long salaId) {
+		super();
+		this.salaId = salaId;
+	}
+
+
+
+	public Sesion(Long id, long salaId) {
+		super();
+		this.id = id;
+		this.salaId = salaId;
+	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public long getSalaId() {
+		return salaId;
+	}
+
+
+
+	public void setSalaId(long salaId) {
+		this.salaId = salaId;
+	}
+
+	
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+					xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+					http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="usuario (generated)" id="1400847488681-1">
+    
+        <createTable catalogName="grupo03" tableName="USUARIO">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NOMBRE" type="VARCHAR(45)"/>
+            <column name="PASSWORD" type="VARCHAR(45)"/> 
+        </createTable>
+        
+         <createTable catalogName="grupo03" tableName="NOTA">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="USUARIO_ID" type="INT(10)"/>
+            <column name="URL_ID" type="INT(10)"/>
+            <column name="TEXTO" type="VARCHAR(45)"/>
+            <column name="CHECK" type="BOOLEAN"/>   
+        </createTable>
+        
+        <createTable catalogName="grupo03" tableName="URL">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="TEXTO" type="VARCHAR(45)"/>
+
+        </createTable>
+
+    </changeSet>
+    
+    <changeSet author="usuario (generated)" id="1400847488682-1">
+        <addForeignKeyConstraint 
+        			constraintName="FK_NOTA_ID_URL" 
+        			referencedTableName="URL" 
+        			baseColumnNames="URL_ID" 
+        			baseTableName="NOTA" 
+        			referencedColumnNames="ID"/>       			
+    </changeSet>
+</databaseChangeLog>

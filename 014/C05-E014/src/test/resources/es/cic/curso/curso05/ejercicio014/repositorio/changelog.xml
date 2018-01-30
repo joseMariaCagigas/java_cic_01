@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+					xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+					http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="usuario (generated)" id="1400847488681-1">
+        <createTable catalogName="curso05" tableName="producto">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+             <column name="codigo_barras" type="INT(10)">
+            	 <!-- <constraints unique="true"/>  -->
+            </column>
+            <column name="nombre" type="VARCHAR(100)"></column>
+            <column name="precio" type="INT(4)"/>
+            <column name="unidades_tienda" type="INT(4)"/>
+            <column name="unidades_almacen" type="INT(4)"/>
+        </createTable>
+      <createTable catalogName="curso05" tableName="venta">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="unidades" type="INT(4)"/>
+            <column name="producto_id" type="INT(3)"/>
+            <column name="importe" type="INT(4)"/>
+        </createTable>
+        <addForeignKeyConstraint 
+        			constraintName="fk_venta_id_producto" 
+        			referencedTableName="producto" 
+        			baseColumnNames="producto_id" 
+        			baseTableName="venta" 
+        			referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

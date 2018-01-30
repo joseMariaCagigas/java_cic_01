@@ -1,0 +1,16 @@
+package es.cic.curso.curso14.ejercicio016.dominio;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public class CineSesiones {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
+	@Column(name="salaid")
+	private long salaid;
+}

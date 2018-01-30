@@ -1,0 +1,14 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class VentaRepositoryImplTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

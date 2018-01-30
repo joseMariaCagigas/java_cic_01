@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+					xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+					http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="usuario (generated)" id="1400847488681-1">
+        <createTable catalogName="curso14" tableName="Venta">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="salaId" type="INTEGER(2)"/>
+ 
+        </createTable>
+        
+                <createTable catalogName="curso14" tableName="Reservas">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="asientoId" type="INTEGER(2)"/>            
+            <column name="estado" type="BOOLEAN"/>
+ 
+        </createTable>
+        
+                <createTable catalogName="curso14" tableName="Salas">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="numButacas" type="INTEGER(2)"/>            
+        </createTable>
+        
+                <createTable catalogName="curso14" tableName="Sesiones">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="salaId" type="INTEGER(2)"/>            
+ 
+        </createTable>
+        
+            <createTable catalogName="curso14" tableName="Horarios">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="sesionId" type="INTEGER(2)"/>
+            <column name="hora" type="VARCHAR(100)"/>  
+            <column name="fecha" type="VARCHAR(100)"/>           
+ 
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

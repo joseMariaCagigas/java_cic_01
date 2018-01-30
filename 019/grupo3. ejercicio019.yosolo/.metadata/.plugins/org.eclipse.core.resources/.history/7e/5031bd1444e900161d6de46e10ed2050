@@ -1,0 +1,116 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Venta;
+import es.cic.curso.curso14.ejercicio016.helper.TestHelper;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={
+				"classpath:es/cic/curso/curso14/ejercicio016/applicationContext.xml"
+		})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+	TransactionalTestExecutionListener.class})
+@Transactional
+public class VentaRepositoryImplTest {
+
+	@Autowired
+	private VentaRepository ventaRepository;
+	@Autowired
+	private TestHelper tHelper;
+
+	@PersistenceContext
+	private EntityManager em;
+
+	@Test
+	public void testAdd() {
+		Venta cine = new Venta();
+		cine.setSesionId(2);
+		cine.setRecaudacionSala(155.0);
+		cine.setCerrado(false);
+		
+		assertNull(cine.getId());
+
+		ventaRepository.add(cine);
+
+		assertNotNull(cine.getSalaId());
+	}
+
+	@Test
+	public void testRead() {
+		Long clavePrimaria = tHelper.generaVenta();
+
+		Venta resultado = ventaRepository.read(clavePrimaria);
+
+		assertEquals(3, resultado.getSesionId());
+	}
+
+	@Test(expected=PersistenceException.class)
+	public void testRead_noExiste() {
+		Long clavePrimaria = Long.MIN_VALUE;
+
+		Venta resultado = ventaRepository.read(clavePrimaria);
+
+		assertEquals(1, resultado.getSesionId());
+	}
+
+	@Test
+	public void testList() {
+		tHelper.generaVenta();
+		tHelper.generaVenta();
+		tHelper.generaVenta();
+
+		List<Venta> resultado = ventaRepository.list();
+
+		assertTrue(resultado.size()>= 3);
+	}
+
+	@Test
+	public void testDelete() {
+		Long clavePrimaria = tHelper.generaVenta();
+
+		ventaRepository.delete(clavePrimaria);
+		Venta v;
+		try {
+			v  = em.find(Venta.class, clavePrimaria);
+		} catch (PersistenceException pe){
+			return;
+		}
+		assertNull(v);
+	}
+
+	@Test
+	public void testUpdate() {
+		Long clavePrimaria = tHelper.generaVenta();
+
+		Venta venta2 = new Venta();
+		venta2.setId(clavePrimaria);
+		venta2.setSesionId(3);
+
+		Venta resultado = ventaRepository.update(venta2);
+
+		Venta enBBDD = em.find(Venta.class, clavePrimaria);
+		assertEquals(3, enBBDD.getSesionId());
+		assertEquals(3, resultado.getSesionId());
+	}
+}

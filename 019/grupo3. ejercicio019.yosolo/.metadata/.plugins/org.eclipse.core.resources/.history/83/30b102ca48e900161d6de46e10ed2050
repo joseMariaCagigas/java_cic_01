@@ -1,0 +1,29 @@
+package es.cic.curso.curso14.ejercicio016.dominio;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public class CineReserva {
+
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
+	@Column(name="usuario")
+	private String usuario;
+	
+	@Column(name="asientoid")
+	private long asientoid;
+	
+	@Column(name="estado")
+	private boolean estado;
+	
+	
+	
+	
+	
+	
+}

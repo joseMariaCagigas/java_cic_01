@@ -1,0 +1,28 @@
+package es.cic.curso.curso14.ejercicio016.service;
+
+import es.cic.curso.curso14.ejercicio016.datos.Venta;
+
+public interface VentaService {
+
+	double obtenerRecaudacionSala(long salaId);
+
+	double obtenerRecaudacionCine();
+
+	boolean esCerradoSesion(long salaId, long sesionId);
+	
+	boolean hayAsientosLibres(long salaID, long sesionId);
+	
+	boolean venderEntrada(Venta venta, long salaId, long sesionId, int cantidad);
+
+	void cerrarSesion(long salaId, long sesionId);
+	
+	void abrirSesion(long salaId, long sesionId);
+	
+	void cerrarSala(long salaId);
+	
+	void abrirSala(long salaId);
+	
+	void cerrarCine();
+	
+	void abrirCine();
+}

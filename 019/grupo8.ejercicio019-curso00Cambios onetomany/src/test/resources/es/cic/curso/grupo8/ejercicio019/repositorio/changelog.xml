@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+					xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+					http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="usuario (generated)" id="1400847488681-1">
+        <createTable catalogName="todo" tableName="usuario">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="nombre" type="VARCHAR(100)"></column>
+            <column name="nombre_usuario" type="VARCHAR(100)"></column>
+            <column name="apellidos" type="VARCHAR(100)"></column>
+        </createTable>
+    	<createTable catalogName="todo" tableName="url">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="enlace" type="VARCHAR(100)"></column>
+        </createTable>
+        <createTable catalogName="todo" tableName="nota">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id_usuario" type="INT(10)"></column>
+            <column name="id_url" type="INT(10)">
+                        	<constraints nullable="true"/>
+            </column>
+            <column name="contenido" type="TEXT"></column>
+            <column name="esta_hecho" type="BOOLEAN"></column>
+        </createTable>
+        <addForeignKeyConstraint 
+        			constraintName="fk_nota_id_usuario" 
+        			referencedTableName="usuario" 
+        			baseColumnNames="id_usuario" 
+        			baseTableName="nota" 
+        			referencedColumnNames="id"/>
+   </changeSet>
+   <changeSet author="usuario (generated)" id="1400847488682-1">
+        <addForeignKeyConstraint 
+        			constraintName="fk_nota_id_url" 
+        			referencedTableName="url" 
+        			baseColumnNames="id_url" 
+        			baseTableName="nota" 
+        			referencedColumnNames="id"/>       			
+    </changeSet>
+</databaseChangeLog>

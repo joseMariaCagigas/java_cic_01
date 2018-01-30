@@ -1,0 +1,122 @@
+package es.cic.curso.curso14.ejercicio016.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import es.cic.curso.curso14.ejercicio016.repository.VentaRepository;
+import es.cic.curso.curso14.ejercicio016.datos.Horarios;
+import es.cic.curso.curso14.ejercicio016.datos.Reservas;
+import es.cic.curso.curso14.ejercicio016.datos.Salas;
+import es.cic.curso.curso14.ejercicio016.datos.Sesiones;
+import es.cic.curso.curso14.ejercicio016.datos.Venta;
+import es.cic.curso.curso14.ejercicio016.repository.HorariosRepository;
+import es.cic.curso.curso14.ejercicio016.repository.SalasRepository;
+import es.cic.curso.curso14.ejercicio016.repository.SesionesRepository;
+import es.cic.curso.curso14.ejercicio016.repository.ReservasRepository;
+
+
+@Service
+@Transactional
+public class VentaServiceImpl implements VentaService {
+	
+	@Autowired 
+	private VentaRepository ventaRepository;
+	
+	@Autowired 
+	private ReservasRepository reservaRepository;
+	
+	@Autowired 
+	private SalasRepository salaRepository;
+	
+	@Autowired 
+	private SesionesRepository sesionRepository;
+	
+	public void anadirAsientosOcupados(Salas sala, int cantidad){
+		sala.setNumButacasOcupadas(sala.getNumButacasOcupadas() + cantidad);
+	}
+	
+	@Override
+	public double obtenerRecaudacionSala(long salaId){
+		double recaudacion = 0;
+		
+		for (Salas v : salaRepository.list()){
+			if (v.getId() == salaId){
+			recaudacion += v.getRecaudacionSala();
+			}
+		}
+		return recaudacion;
+	}
+	
+	@Override
+	public double obtenerRecaudacionCine(){
+		double recaudacion = 0;
+		
+		for (Salas v : salaRepository.list()){
+			recaudacion += v.getRecaudacionSala();
+		}
+		return recaudacion;
+	}
+	
+	@Override
+	public boolean hayAsientosLibres(long salaID, long sesionId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean venderEntrada(Venta venta, long salaId, long sesionId, int cantidad) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ReservasRepository getReservaRepository() {
+		return reservaRepository;
+	}
+
+	public void setReservaRepository(ReservasRepository reservaRepository) {
+		this.reservaRepository = reservaRepository;
+	}
+
+	@Override
+	public boolean esCerradoSesion(long salaId, long sesionId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void cerrarSesion(long salaId, long sesionId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void abrirSesion(long salaId, long sesionId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cerrarSala(long salaId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void abrirSala(long salaId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void cerrarCine() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void abrirCine() {
+		// TODO Auto-generated method stub
+		
+	}	
+}

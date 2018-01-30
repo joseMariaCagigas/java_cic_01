@@ -1,0 +1,74 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+
+
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import es.cic.curso.curso14.ejercicio016.backend.AbstractRepositoryImplTest;
+import es.cic.curso.curso14.ejercicio016.dominio.Sesiones;
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.IRepository;
+import es.cic.curso.curso14.ejercicio016.repository.SesionesRepository;
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={"classpath:es/cic/curso/curso14/ejercicio016/applicationContext.xml"})
+public class SesionesRepositoryTest extends AbstractRepositoryImplTest<Long, Sesiones> {
+
+
+	@Autowired
+	private SesionesRepository sut;
+
+
+
+	@Override
+	public IRepository<Long, Sesiones> getRepository() {
+		return sut;
+	}
+
+	@Override
+	public Sesiones getInstanceDeTParaNuevo() {
+		Sesiones sesion = new Sesiones();
+		sesion.setSalaid(3);
+		return sesion;
+	}
+	
+	@Override
+	public Sesiones getInstanceDeTParaLectura() {
+		Sesiones sesion = new Sesiones();
+		sesion.setSalaid(3);
+		return sesion;
+	}
+
+	@Override
+	public boolean sonDatosIguales(Sesiones t1, Sesiones t2) {
+		if (t1 == null || t2 == null) {
+			throw new UnsupportedOperationException("No puedo comparar nulos");
+		}
+		if (t1.getId() == (t2.getId())) {
+			return false;
+		}		
+		return true;
+	}
+
+	@Override
+	public Long getClavePrimariaNoExistente() {
+		return Long.MAX_VALUE;
+	}
+
+	@Override
+	public Sesiones getInstanceDeTParaModificar(Long clave) {
+		Sesiones sesion = getInstanceDeTParaLectura();
+		sesion.setId(clave);
+		sesion.setFila(5);
+		return sesion;
+	}
+
+
+
+	
+}

@@ -1,0 +1,79 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import es.cic.curso.curso14.ejercicio016.backend.AbstractRepositoryImplTest;
+import es.cic.curso.curso14.ejercicio016.dominio.Salas;
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.IRepository;
+import es.cic.curso.curso14.ejercicio016.repository.SalasRepository;
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={"classpath:es/cic/curso/curso14/ejercicio016/applicationContext.xml"})
+public class SalasRepositoryTest extends AbstractRepositoryImplTest<Long, Salas> {
+
+
+	@Autowired
+	private SalasRepository sut;
+
+
+
+	@Override
+	public IRepository<Long, Salas> getRepository() {
+		return sut;
+	}
+
+	@Override
+	public Salas getInstanceDeTParaNuevo() {
+		Salas sala = new Salas();
+		sala.setAsientosId(13);
+		sala.setFila(5);
+		sala.setNumButacas(100);
+		sala.setNumButacasOcupadas(25);
+		return sala;
+	}
+	
+	@Override
+	public Salas getInstanceDeTParaLectura() {
+		Salas sala = new Salas();
+		sala.setAsientosId(13);
+		sala.setFila(5);
+		sala.setNumButacas(100);
+		sala.setNumButacasOcupadas(25);
+		return sala;
+	}
+
+	@Override
+	public boolean sonDatosIguales(Salas t1, Salas t2) {
+		if (t1 == null || t2 == null) {
+			throw new UnsupportedOperationException("No puedo comparar nulos");
+		}
+		if (t1.getId().equals(t2.getId())) {
+			return false;
+		}		
+		return true;
+	}
+
+	@Override
+	public Long getClavePrimariaNoExistente() {
+		return Long.MAX_VALUE;
+	}
+
+	@Override
+	public Salas getInstanceDeTParaModificar(Long clave) {
+		Salas sala = getInstanceDeTParaLectura();
+		sala.setId(clave);
+		sala.setSalaId(2);
+		return sala;
+	}
+
+
+
+	
+}

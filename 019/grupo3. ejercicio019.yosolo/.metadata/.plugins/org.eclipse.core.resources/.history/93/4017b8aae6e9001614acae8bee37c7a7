@@ -1,0 +1,22 @@
+package es.cic.curso.curso14.ejercicio016.helper;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Venta;
+
+@Repository
+public class TestHelper {
+	
+	@PersistenceContext
+	private EntityManager em;
+	
+	public Long generaVenta() {
+		Venta v = new Venta(1, 150, false);
+		
+		em.persist(v);
+		return v.getId();
+	}
+}

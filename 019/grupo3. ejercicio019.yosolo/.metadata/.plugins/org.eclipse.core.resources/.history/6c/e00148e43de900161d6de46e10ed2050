@@ -1,0 +1,248 @@
+package es.cic.curso.curso14.ejercicio016.service;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
+
+import es.cic.curso.curso14.ejercicio016.helper.TestHelper;
+import es.cic.curso.curso14.ejercicio016.repository.VentaRepository;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={
+				"classpath:es/cic/curso/curso14/ejercicio016/applicationContext.xml"
+		})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
+	TransactionalTestExecutionListener.class})
+@Transactional
+public class VentaServiceImplTest {
+	
+	@Autowired
+	private VentaService ventaService;
+	@Autowired
+	private VentaRepository ventaRepository;
+	@Autowired
+	private TestHelper tHelper;
+
+	Long claveVenta;
+	
+	@Before
+	public void setUp() throws Exception {
+		claveVenta = tHelper.generaVenta();
+	}
+	
+	@Test
+	public void testObtenerRecaudacionSala(){
+		double recaudacion;
+		
+		recaudacion = ventaService.obtenerRecaudacionSala(1);
+		assertEquals(157.0, recaudacion, 0.1);
+	}	
+	
+	@Test
+	public void testObtenerRecaudacionCine(){
+		double recaudacion;
+		
+		recaudacion = ventaService.obtenerRecaudacionCine();
+		assertEquals(157.0, recaudacion, 0.1);
+	}	
+	
+	@Test
+	public void testVenderEntrada_ConDescuento(){
+
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 5);
+		
+		double recaudacion = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados = ventaRepository.read(claveVenta).getAsientosOcupados();
+		assertEquals(179.5, recaudacion, 0.001);
+		assertEquals(60, asientosOcupados);
+	}
+	
+	@Test
+	public void testVenderEntrada_SinDescuento_SesionAbierta(){
+
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 4);
+		
+		double recaudacion = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(177.0, recaudacion, 0.001);
+		assertEquals(59, asientosOcupados);
+		assertEquals(false, resultado);
+	}
+	
+	@Test
+	public void testVenderEntrada_SesionCerrada(){
+		ventaService.cerrarSala(1);
+
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 4);
+		
+		double recaudacion = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(157.0, recaudacion, 0.001);
+		assertEquals(55, asientosOcupados);
+		assertEquals(true, resultado);
+	}
+	
+	@Test
+	public void testVenderEntrada_SalaCerrada_SalaAbierta(){
+		ventaService.cerrarSala(1);
+
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 4);
+		
+		double recaudacion = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(157.0, recaudacion, 0.001);
+		assertEquals(55, asientosOcupados);
+		assertEquals(true, resultado);
+		
+		ventaService.abrirSala(1);
+		
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 5);
+		
+		double recaudacion2 = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados2 = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado2 = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(179.5, recaudacion2, 0.001);
+		assertEquals(60, asientosOcupados2);
+		assertEquals(false, resultado2);
+	}
+	
+	@Test
+	public void testVenderEntrada_CineCerrado(){
+		ventaService.cerrarCine();
+
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 4);
+		
+		double recaudacion = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(157.0, recaudacion, 0.001);
+		assertEquals(55, asientosOcupados);
+		assertEquals(true, resultado);
+	}
+	
+	@Test
+	public void testVenderEntrada_CineCerrado_CineAbierto(){
+		ventaService.cerrarCine();
+
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 4);
+		
+		double recaudacion = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(157.0, recaudacion, 0.001);
+		assertEquals(55, asientosOcupados);
+		assertEquals(true, resultado);
+		
+		ventaService.abrirCine();
+		
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 5);
+		
+		double recaudacion2 = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados2 = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado2 = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(179.5, recaudacion2, 0.001);
+		assertEquals(60, asientosOcupados2);
+		assertEquals(false, resultado2);
+	}
+	
+	@Test
+	public void testVenderEntrada_SalaCerrada_CineAbierto(){
+		ventaService.cerrarSala(1);
+
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 4);
+		
+		double recaudacion = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(157.0, recaudacion, 0.001);
+		assertEquals(55, asientosOcupados);
+		assertEquals(true, resultado);
+		
+		ventaService.abrirCine();
+		
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 5);
+		
+		double recaudacion2 = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados2 = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado2 = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(179.5, recaudacion2, 0.001);
+		assertEquals(60, asientosOcupados2);
+		assertEquals(false, resultado2);
+	}
+	
+	@Test
+	public void testVenderEntrada_CineCerrado_SesionAbierta(){
+		ventaService.cerrarCine();
+
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 4);
+		
+		double recaudacion = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(157.0, recaudacion, 0.001);
+		assertEquals(55, asientosOcupados);
+		assertEquals(true, resultado);
+		
+		ventaService.abrirSesion(1, 3);
+		
+		ventaService.venderEntrada(ventaRepository.read(claveVenta), 1, 3, 5);
+		
+		double recaudacion2 = ventaService.obtenerRecaudacionCine();
+		int asientosOcupados2 = ventaRepository.read(claveVenta).getAsientosOcupados();
+		boolean resultado2 = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(179.5, recaudacion2, 0.001);
+		assertEquals(60, asientosOcupados2);
+		assertEquals(false, resultado2);
+	}
+	
+	@Test
+	public void testHayAsientosLibres(){
+		boolean resultado;
+		
+		resultado = ventaService.hayAsientosLibres(1, 3);
+		
+		assertEquals(true, resultado);
+	}
+	
+	@Test
+	public void testEsCerradoSesion(){
+		boolean resultado;
+		
+		resultado = ventaService.esCerradoSesion(2, 3);
+		
+		assertEquals(false, resultado);
+	}
+	
+	@Test
+	public void testCerrarSesion(){
+		ventaService.cerrarSesion(1, 3);
+		
+		boolean resultado = ventaService.esCerradoSesion(1, 3);
+		
+		assertEquals(true, resultado);
+	}
+}

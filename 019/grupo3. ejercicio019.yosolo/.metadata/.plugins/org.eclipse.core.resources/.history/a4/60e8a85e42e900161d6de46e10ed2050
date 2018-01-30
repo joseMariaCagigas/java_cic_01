@@ -1,0 +1,72 @@
+package es.cic.curso.curso14.ejercicio016.dominio;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import es.cic.curso.curso14.ejercicio016.repository.Identificable;
+
+public class Sala implements Identificable<Long>{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
+	@Column(name="capacidad")
+	private int capacidad;
+	
+	@Column(name="asientosocupados")
+	private int asientosOcupados;
+
+	public Sala() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Sala(int capacidad, int asientosOcupados) {
+		super();
+		this.capacidad = capacidad;
+		this.asientosOcupados = asientosOcupados;
+	}
+
+	public Sala(Long id, int capacidad, int asientosOcupados) {
+		super();
+		this.id = id;
+		this.capacidad = capacidad;
+		this.asientosOcupados = asientosOcupados;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getCapacidad() {
+		return capacidad;
+	}
+
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
+	}
+
+	public int getAsientosOcupados() {
+		return asientosOcupados;
+	}
+
+	public void setAsientosOcupados(int asientosOcupados) {
+		this.asientosOcupados = asientosOcupados;
+	}
+
+	
+}

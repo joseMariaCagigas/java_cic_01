@@ -1,0 +1,47 @@
+package es.cic.curso.curso14.ejercicio016.dominio;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public class CineAsientos {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+
+	@Column(name="salaId")
+	private long salaId;
+	
+	@Column(name="fila")
+	private int fila;
+	
+	@Column(name="precio")
+	private static double PRECIO = 5.5;
+	
+	@Column(name="recaudacionsala")
+	private double recaudacionSala;
+
+	public CineAsientos() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CineAsientos(long salaId, int fila, double recaudacionSala) {
+		super();
+		this.salaId = salaId;
+		this.fila = fila;
+		this.recaudacionSala = recaudacionSala;
+	}
+
+	public CineAsientos(Long id, long salaId, int fila, double recaudacionSala) {
+		super();
+		this.id = id;
+		this.salaId = salaId;
+		this.fila = fila;
+		this.recaudacionSala = recaudacionSala;
+	}
+	
+	
+}

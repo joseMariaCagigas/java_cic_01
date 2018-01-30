@@ -1,0 +1,20 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import org.springframework.stereotype.Repository;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Reservas;
+import es.cic.curso.curso14.ejercicio016.repoAbst.AbstractRepositoryImpl;
+
+@Repository
+public class ReservasRepositoryImpl extends AbstractRepositoryImpl<Long, Reservas> implements ReservasRepository {
+
+	@Override
+	public Class<Reservas> getClassDeT() {
+		return Reservas.class;
+	}
+
+	@Override
+	public String getNombreTabla() {
+		return "Reservas";
+	}
+}

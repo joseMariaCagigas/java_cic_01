@@ -1,0 +1,108 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import es.cic.curso.curso14.ejercicio016.dominio.CineAsientos;
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.AbstractRepositoryImpl;
+import es.cic.curso.curso14.ejercicio016.repositorioEstatico.IRepository;
+import es.cic.curso.curso14.ejercicio016.repository.CineAsientosRepository;;
+
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={
+				"classpath:es/cic/curso/curso14/ejercicio016/applicationContext.xml"
+				})
+
+public class CineAsientosRepositoryTest extends AbstractRepositoryImpl<Long, CineAsientos> {
+
+	@Autowired
+	private CineAsientosRepository sut;
+	
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@Override
+	public IRepository<Long, CineAsientos> getRepository() {
+		return sut;
+	}
+
+	@Override
+	public CineAsientos getInstanceDeTParaNuevo() {
+		CineAsientos asientos = new CineAsientos();
+		asientos.setSalaId(2);
+		asientos.setFila(12);
+		asientos.setRecaudacionSala(120);
+		
+		return asientos;
+	}
+
+	@Override
+	public CineAsientos getInstanceDeTParaLectura() {
+		CineAsientos asientos = new CineAsientos();
+		asientos.setCodigoBarras(1);
+		asientos.setNombre("cafe");
+		asientos.setPrecio(4);
+		asientos.setUnidadesTienda(10);
+		asientos.setUnidadesAlmacen(14);
+		return asientos;
+	}
+
+	@Override
+	public boolean sonDatosIguales(CineAsientos t1, CineAsientos t2) {
+		if (t1 == null || t2 == null) {
+			throw new UnsupportedOperationException("No puedo comparar nulos");
+		}
+		if (t1.getCodigoBarras() != t2.getCodigoBarras()) {
+			return false;
+		}
+		
+		if (t1.getNombre() != t2.getNombre()) {
+			return false;
+		}
+		if (t1.getPrecio() != t2.getPrecio()) {
+			return false;
+		}
+		if (t1.getUnidadesAlmacen() != t2.getUnidadesAlmacen()) {
+			return false;
+		}	
+		if (t1.getUnidadesTienda() != t2.getUnidadesTienda()) {
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public Long getClavePrimariaNoExistente() {
+		return Long.MAX_VALUE;
+	}
+
+	@Override
+	public CineAsientos getInstanceDeTParaModificar(Long clave) {
+		CineAsientos asientos = getInstanceDeTParaLectura();
+		asientos.setId(clave);
+		asientos.setPrecio(6);;
+		return asientos;
+	}
+
+	@Override
+	public Class<CineAsientos> getClassDeT() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getNombreTabla() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

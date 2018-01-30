@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="es.cic.curso.curso06.ejercicio014.versionII.repositorios.Identificable"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso06.ejercicio014.versionI.servicios.Inventario"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso06.ejercicio014.versionII.repositorios.InventarioRepository"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso06.ejercicio014.versionII.datos.Inventario"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso06.badulake.dominio.producto.Producto"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso06.badulake.dominio.producto.ProductoRepository"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso14.ejercicio016.dominio.Sesion"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso14.ejercicio016.dominio.Sala"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso14.ejercicio016.dominio.CineHorario"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso14.ejercicio016.dominio.CineSalas"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso14.ejercicio016.dominio.CineSesiones"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso14.ejercicio016.repository.CineAsientosRepository"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso14.ejercicio016.repositorioEstatico.IRepository"/>
+<fullyQualifiedTypeName name="es.cic.curso.curso14.ejercicio016.repositorioEstatico.Identificable"/>
+<fullyQualifiedTypeName name="javax.persistence.Entity"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="/home/curso/workspace/ejercicio016"/>
+			<item value="/home/curso/workspace/grupo3.ejercicio020"/>
+			<item value="/home/curso/workspace/C05-E014"/>
+			<item value="/home/curso/workspace/curso06.wallachof"/>
+			<item value="/home/curso/workspace/ejercicio014"/>
+			<item value="/home/curso/workspace/grupo10.badulake"/>
+			<item value="/home/curso/workspace/grupo3.ejercicio019"/>
+			<item value="/media/sf_curso/workspace/curso06.wallachof"/>
+			<item value="/home/curso/workspace/grupo3.ejercicio019.2"/>
+			<item value="/home/curso/workspace/grupo8.ejercicio019-curso00Cambios onetomany"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>

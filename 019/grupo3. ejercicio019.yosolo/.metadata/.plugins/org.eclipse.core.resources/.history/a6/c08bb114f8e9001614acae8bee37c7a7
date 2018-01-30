@@ -1,0 +1,21 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import org.springframework.stereotype.Repository;
+
+
+import es.cic.curso.curso14.ejercicio016.dominio.Salas;
+import es.cic.curso.curso14.ejercicio016.repoAbst.AbstractRepositoryImpl;
+
+@Repository
+public class SalasRepositoryImpl extends AbstractRepositoryImpl<Long, Salas> implements SalasRepository {
+
+	@Override
+	public Class<Salas> getClassDeT() {
+		return Salas.class;
+	}
+
+	@Override
+	public String getNombreTabla() {
+		return "Salas";
+	}
+}

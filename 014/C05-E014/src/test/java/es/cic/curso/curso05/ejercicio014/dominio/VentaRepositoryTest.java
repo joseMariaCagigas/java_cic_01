@@ -1,0 +1,88 @@
+package es.cic.curso.curso05.ejercicio014.dominio;
+
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import es.cic.curso.curso05.ejercicio014.dominio.producto.Producto;
+import es.cic.curso.curso05.ejercicio014.dominio.venta.Venta;
+import es.cic.curso.curso05.ejercicio014.dominio.venta.VentaRepository;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+		locations={
+				"classpath:es/cic/curso/curso05/ejercicio014/applicationContext.xml"
+				})
+
+public class VentaRepositoryTest extends AbstractRepositoryImplTest<Long, Venta> {
+
+	@Autowired
+	private VentaRepository sut;
+	
+	private Producto producto;
+	
+	@Before
+	public void setUp() throws Exception {
+		producto = new Producto(1111, "Cafe",4,10,14);
+		em.persist(producto);
+	}
+
+	@Override
+	public IRepository<Long, Venta> getRepository() {
+		return sut;
+	}
+
+	@Override
+	public Venta getInstanceDeTParaNuevo() {
+		Venta venta = new Venta();
+		venta.setImporte(10);
+		venta.setProducto(producto);
+		venta.setUnidades(10);
+		return venta;
+	}
+
+	@Override
+	public Venta getInstanceDeTParaLectura() {
+		Venta venta = new Venta();
+		venta.setImporte(10);
+		venta.setProducto(producto);
+		venta.setUnidades(10);
+		return venta;
+	}
+
+	@Override
+	public boolean sonDatosIguales(Venta t1, Venta t2) {
+		if (t1 == null || t2 == null) {
+			throw new UnsupportedOperationException("No puedo comparar nulos");
+		}
+		if (t1.getImporte() != t2.getImporte()) {
+			return false;
+		}
+		
+		if (!t1.getProducto().equals(t2.getProducto())) {
+			return false;
+		}
+		if (t1.getUnidades() != t2.getUnidades()) {
+			return false;
+		}
+		
+		
+		return true;
+	}
+
+	@Override
+	public Long getClavePrimariaNoExistente() {
+		return Long.MAX_VALUE;
+	}
+
+	@Override
+	public Venta getInstanceDeTParaModificar(Long clave) {
+		Venta venta = getInstanceDeTParaLectura();
+		venta.setId(clave);
+		venta.setUnidades(5);
+		return venta;
+	}
+
+}

@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:context="http://www.springframework.org/schema/context"
+                xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                                        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                                    http://www.springframework.org/schema/context
+    													http://www.springframework.org/schema/context/spring-context.xsd"                                                 
+              >
+        
+    <bean id="gestorNulo" class="es.cic.curso.curso00.ejercicio015.CineGestion"/>
+    <bean id="cineGestion" class="es.cic.curso.curso00.ejercicio015.CineGestion">
+    	<property name="dependencia" ref="otro"></property>
+    </bean>
+    <bean id="otro" class="es.cic.curso.curso00.ejercicio015.CineFichero">
+    </bean>    
+</beans>

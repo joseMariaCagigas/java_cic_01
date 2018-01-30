@@ -1,0 +1,19 @@
+package es.cic.curso.curso14.ejercicio016.repository;
+
+import org.springframework.stereotype.Repository;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Venta;
+
+@Repository
+public class SalaRepositoryImpl extends AbstractRepositoryImpl<Long, Venta> implements VentaRepository {
+
+	@Override
+	public Class<Venta> getClassDeT() {
+		return Venta.class;
+	}
+
+	@Override
+	public String getNombreTabla() {
+		return "venta";
+	}
+}

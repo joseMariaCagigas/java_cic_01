@@ -1,0 +1,141 @@
+package es.cic.curso.curso14.ejercicio016.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import es.cic.curso.curso14.ejercicio016.dominio.Venta;
+import es.cic.curso.curso14.ejercicio016.repository.VentaRepository;
+
+@Service
+@Transactional
+public class VentaServiceImpl implements VentaService {
+	
+	@Autowired 
+	private VentaRepository ventaRepository;
+	
+	public void anadirAsientosOcupados(Venta venta, int cantidad){
+		venta.setAsientosOcupados(venta.getAsientosOcupados() + cantidad);
+	}
+	
+	@Override
+	public double obtenerRecaudacionSala(long salaId){
+		double recaudacion = 0;
+		
+		for (Venta v : ventaRepository.list()){
+			if (v.getSalaId() == salaId){
+			recaudacion += v.getRecaudacionSala();
+			}
+		}
+		return recaudacion;
+	}
+	
+	@Override
+	public double obtenerRecaudacionCine(){
+		double recaudacion = 0;
+		
+		for (Venta v : ventaRepository.list()){
+			recaudacion += v.getRecaudacionSala();
+		}
+		return recaudacion;
+	}
+	
+	@Override
+	public boolean esCerradoSesion(long salaId, long sesionId) {
+		boolean resultado = false;		
+
+		for (Venta v : ventaRepository.list()){
+			if (v.getSalaId() == salaId && v.isCerrado() && v.getSesionId() == sesionId){
+				resultado = true;
+			}
+		}
+		return resultado;
+	}
+	
+	@Override
+	public boolean hayAsientosLibres(long salaId, long sesionId){
+		boolean resultado = false;
+
+		if (!esCerradoSesion(salaId, sesionId)){
+			for (Venta v : ventaRepository.list()){
+				if (v.getSalaId() == salaId && v.getSesionId() == sesionId){
+					int asientosOcupados = v.getAsientosOcupados();
+					int asientosTotales = v.getCapacidad();
+
+					if(asientosOcupados < asientosTotales){
+						resultado = true;
+					}
+				}
+			}
+		}
+		return resultado;
+	}
+	
+	@Override
+	public boolean venderEntrada(Venta venta, long salaId, long sesionId, int cantidad){
+		boolean resultado = false;
+
+		if(hayAsientosLibres(salaId, sesionId)){
+			if (cantidad >= 5){
+				anadirAsientosOcupados(venta, cantidad);
+				venta.setRecaudacionSala(venta.getRecaudacionSala() + ((cantidad * Venta.getPRECIO())*0.9));
+				resultado = true;
+			} else {
+				anadirAsientosOcupados(venta, cantidad);
+				venta.setRecaudacionSala(venta.getRecaudacionSala() + (cantidad * Venta.getPRECIO()));
+				resultado = true;
+			}
+		}
+		return resultado;
+	}
+	
+	@Override
+	public void cerrarSesion(long salaId, long sesionId){
+		for (Venta v : ventaRepository.list()){
+			if (v.getSalaId() == salaId && v.getSesionId() == sesionId){
+				v.setCerrado(true);
+			}
+		}
+	}
+
+	@Override
+	public void abrirSesion(long salaId, long sesionId) {
+		for (Venta v : ventaRepository.list()){
+			if (v.getSalaId() == salaId && v.getSesionId() == sesionId){
+				v.setCerrado(false);
+			}
+		}
+	}
+	
+	@Override
+	public void cerrarSala(long salaId){
+		for (Venta v : ventaRepository.list()){
+			if (v.getSalaId() == salaId){
+				v.setCerrado(true);
+			}
+		}
+	}
+
+	@Override
+	public void abrirSala(long salaId) {
+		for (Venta v : ventaRepository.list()){
+			if (v.getSalaId() == salaId){
+				v.setCerrado(false);
+			}
+		}
+	}
+
+	@Override
+	public void cerrarCine() {
+		for (Venta v : ventaRepository.list()){
+			v.setCerrado(true);
+		}
+	}
+
+	@Override
+	public void abrirCine() {
+		for (Venta v : ventaRepository.list()){
+			v.setCerrado(false);
+		}
+	}	
+}
